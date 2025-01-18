@@ -43,8 +43,14 @@ const jill: User = {
 // -----------------------
 // Optional function parameter
 
-function printIngredient(ingredient: string, quantity: string, extraInfo?: string) {
-  console.log(`${quantity} ${ingredient} ${extraInfo ? extraInfo : "No extra details"}`);
+function printIngredient(
+  ingredient: string,
+  quantity: string,
+  extraInfo?: string
+) {
+  console.log(
+    `${quantity} ${ingredient} ${extraInfo ? extraInfo : "No extra details"}`
+  );
 }
 
 printIngredient("Flour", "1C");
@@ -61,7 +67,7 @@ printIngredient("Granular Sugar", "2TS", "Can substitute with Castar Sugar");
 // It allows more readable code with clearer intent.
 // Improves DRY principle.
 
-// Union Types 
+// Union Types
 type SocialHandles = {
   facebook: string;
   twitter?: string;
@@ -79,7 +85,7 @@ type Contact = SocialHandles | Address;
 interface UserV2 {
   id: string;
   name: string;
-  contact: Contact;     // ********
+  contact: Contact; // ********
   status: boolean;
 }
 
@@ -102,33 +108,31 @@ const jenny: UserV2 = {
   status: false,
 };
 
-const getContact = (user: UserV2) : string => {
-    if ( 'street' in user.contact ) {
-       const contact = user.contact
-       return `The address is: ${JSON.stringify(contact)}`
-    } 
-    const contact = user.contact
-    return `The social handles are: ${JSON.stringify(contact)}`
-}
+const getContact = (user: UserV2): string => {
+  if ("street" in user.contact) {
+    const contact = user.contact;
+    return `The address is: ${JSON.stringify(contact)}`;
+  }
+  const contact = user.contact;
+  return `The social handles are: ${JSON.stringify(contact)}`;
+};
 
-console.log(getContact(kyle) )
+console.log(getContact(kyle));
 
 // ------------------------------------------
 // Literal type
 type Department = "Engineering" | "Sales" | "Accounts";
 
-type StaffMember = UserV2 & {department : Department}
+type StaffMember = UserV2 & { department: Department };
 
-const company : StaffMember[] = [
-   { ...jenny, department: "Engineering" },
-   { ...kyle, department: "Sales" }
-
-
-]
+const company: StaffMember[] = [
+  { ...jenny, department: "Engineering" },
+  { ...kyle, department: "Sales" },
+];
 const getStaffNames = (department: Department): string[] => {
-  return company.filter(staff => staff.department === department).map(staff => staff.name)
-
+  return company
+    .filter((staff) => staff.department === department)
+    .map((staff) => staff.name);
 };
 
 console.log(getStaffNames("Engineering"));
-

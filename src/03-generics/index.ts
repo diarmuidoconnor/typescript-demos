@@ -1,11 +1,11 @@
 import { Person, Friend } from "../01-functions/myTypes";
 
-// Background 
+// Background
 
-const someStrings = ["hello", "to", "the", "universe"]
-someStrings.sort((a,b) => a.length - b.length)
+const someStrings = ["hello", "to", "the", "universe"];
+someStrings.sort((a, b) => a.length - b.length);
 
-console.log("The Array sort: ", someStrings)
+console.log("The Array sort: ", someStrings);
 
 // ------------- Without Generics -------------------
 function stringRanker(
@@ -20,7 +20,7 @@ const stringsByLength = stringRanker(
   ["hello", "to", "the", "universe"],
   (str) => str.length
 );
-console.log("Stribg sort by length ",stringsByLength);
+console.log("Stribgs sorted by length ", stringsByLength);
 
 function personRanker(
   people: Person[],
@@ -44,31 +44,29 @@ const jill: Person = {
 const jane: Person = {
   first: "Jane",
   last: "Bliags",
-  age: 30,
+  // age: 30,
 };
 
-const peopleByAge = personRanker([joe, jill, jane], 
-  (p) => p.age ? p.age : 30  // Due to age being optional
+const peopleByAge = personRanker(
+  [joe, jill, jane],
+  (p) => (p.age ? p.age : 30) // Due to age being optional
 );
 
-console.log("People sort by age: ", peopleByAge);
+console.log("People sorted by age: ", peopleByAge);
 
 // -------------------With Generics -----------------------------
 
-function genericRanker<T>(
-  element: T[], 
-  ranker: (e: T) => number): T[] {
+function genericRanker<T>(element: T[], ranker: (e: T) => number): T[] {
   const result = element.sort((a, b) => ranker(a) - ranker(b));
   return result;
 }
 
 // Return type is inferred - use cmd-k,i
-const peopleByAge2 = genericRanker<Person>(
-    [jane, joe, jill], 
-    (p) => p.age ? p.age : 30
+const peopleByAge2 = genericRanker<Person>([jane, joe, jill], (p) =>
+  p.age ? p.age : 30
 );
 
-console.log("(Gen) People sort by age: ",peopleByAge2);
+console.log("(Gen) People sorted by age: ", peopleByAge2);
 
 // The string type is inferred for T because of array element's type.
 // Use cmd-k cmd-i to confirm
@@ -76,7 +74,7 @@ const stringsByLength2 = genericRanker(
   ["hello", "to", "the", "universe"],
   (str) => str.length
 );
-console.log("(Gen) String sort by length: ",stringsByLength2);
+console.log("(Gen) Strings sorted by length: ", stringsByLength2);
 
 // -------------------------------
 // Generics can be applied to interfaces as well.
