@@ -23,7 +23,7 @@ let myBoolean: boolean = true;
 // Some useful built-in types
 let yearF: RegExp =  /^(19|20)\d{2}/
 
-let data = '2023-xxxxxxxx'
+let data : string = '2023-xxxxxxxx'
 console.log(` ${data} - ${yearF.test(data)}`  )
 data = '201-yyyyyyy'
 console.log(` ${data} - ${yearF.test(data)}`  )
