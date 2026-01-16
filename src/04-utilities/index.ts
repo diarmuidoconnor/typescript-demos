@@ -11,7 +11,7 @@ interface TechUser {
 // Make everything optional - use cmd-k, cmd-i to confirm
 type TechUserOptionals = Partial<TechUser>;
 
-const merge = (user: TechUser, overrides: TechUserOptionals): TechUser => {
+const mergeUpdate = (user: TechUser, overrides: TechUserOptionals): TechUser => {
   return {
     ...user,
     ...overrides,
@@ -19,11 +19,11 @@ const merge = (user: TechUser, overrides: TechUserOptionals): TechUser => {
 };
 
 console.log(
-  merge(
+  mergeUpdate(
     {
       name: "Diarmuid",
       id: 2,
-      programming: ["JS", "TS"],
+      programming: ["Python", "TS"],
       email: "diarmuid@wit.ie",
     },
     {
@@ -33,12 +33,12 @@ console.log(
 );
 
 // Make every property mandatory
-type FullTechUser = Required<TechUser>;
+type CompleteTechUser = Required<TechUser>;
 
 // Pick a subset of the proerties
-type JustEmailAndName = Pick<TechUser, "email" | "name">;
+type MinimalTechUser = Pick<TechUser, "email" | "name">;
 
-function createUser(user_init: JustEmailAndName): TechUser {
+function createUser(user_init: MinimalTechUser): TechUser {
   return {
     ...user_init,
     id: Math.floor(Math.round(10)) * (1000 - 1) + 1,
@@ -59,7 +59,7 @@ type TechUserProgramming = Omit<TechUser, "id" | "email">;
 // are of type KeyType and the values are of type ValueType.
 type TechUserMapById = Record<TechUser["id"], TechUserProgramming>;
 
-const mapById = (users: TechUser[]): TechUserMapById => {
+const makeMapById = (users: TechUser[]): TechUserMapById => {
   return users.reduce((acc, user) => {
     const { id, email, ...rest } = user;
     return {
@@ -70,7 +70,7 @@ const mapById = (users: TechUser[]): TechUserMapById => {
 };
 
 console.log(
-  mapById([
+  makeMapById([
     {
       id: 1,
       name: "Mr. Foo",

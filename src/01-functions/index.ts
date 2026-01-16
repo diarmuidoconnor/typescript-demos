@@ -1,4 +1,4 @@
-import { Person } from "./myTypes";
+import { Person } from "../myTypes";
 
 //-------------- Function parameter and return types ------------------
 function addNumbers(a: number, b: number): number {

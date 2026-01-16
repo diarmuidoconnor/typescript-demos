@@ -1,4 +1,4 @@
-import { Person, Friend } from "../01-functions/myTypes";
+import { Person, Friend } from "../myTypes";
 
 // Background
 
