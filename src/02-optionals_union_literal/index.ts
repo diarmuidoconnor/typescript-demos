@@ -125,14 +125,14 @@ type Department = "Engineering" | "Sales" | "Accounts";
 
 type StaffMember = UserV2 & { department: Department };
 
-const company: StaffMember[] = [
+const theCompany: StaffMember[] = [
   { ...jenny, department: "Engineering" },
   { ...kyle, department: "Sales" },
 ];
-const getStaffNames = (department: Department): string[] => {
+const getStaffNames = (company : StaffMember[] , department: Department): string[] => {
   return company
     .filter((staff) => staff.department === department)
     .map((staff) => staff.name);
 };
 
-console.log(getStaffNames("Engineering"));
+console.log(getStaffNames(theCompany, "Engineering"));

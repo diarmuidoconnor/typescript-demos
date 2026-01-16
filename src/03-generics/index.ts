@@ -17,7 +17,7 @@ function stringRanker(
 }
 
 const stringsByLength = stringRanker(
-  ["hello", "to", "the", "universe"],
+  ["all", "I", "need", "for", "Christmas"],
   (str) => str.length
 );
 console.log("Stribgs sorted by length ", stringsByLength);
@@ -44,12 +44,12 @@ const jill: Person = {
 const jane: Person = {
   first: "Jane",
   last: "Bliags",
-  // age: 30,
+  age: 35,
 };
 
 const peopleByAge = personRanker(
   [joe, jill, jane],
-  (p) => (p.age ? p.age : 30) // Due to age being optional
+  (p) => p.age  // ? p.age : 30 // Due to age being optional
 );
 
 console.log("People sorted by age: ", peopleByAge);
@@ -71,7 +71,7 @@ console.log("(Gen) People sorted by age: ", peopleByAge2);
 // The string type is inferred for T because of array element's type.
 // Use cmd-k cmd-i to confirm
 const stringsByLength2 = genericRanker(
-  ["hello", "to", "the", "universe"],
+  ["it", "was", "not", "until", "they"],
   (str) => str.length
 );
 console.log("(Gen) Strings sorted by length: ", stringsByLength2);

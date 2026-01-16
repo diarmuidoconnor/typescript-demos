@@ -7,7 +7,9 @@ export interface Friend {
 export interface Person {
   first: string;
   last: string;
-  age?: number;
+  age: number;
+  // age?: number;
+
 }
 
 export type BirthDate = {

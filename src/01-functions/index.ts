@@ -19,26 +19,26 @@ export const addStrings = (str1: string, str2: string): string =>
 
 // axis is a union type - string OR Regular Expression
 export const rotate = (source: string, axis: string | RegExp) => {
-  let chars = '';
-  if (typeof axis === "object") {
+  let pivotPoint = "";
+  if (typeof axis === "string") {
+    pivotPoint = axis;
+  } else {
     const match = source.match(axis);
     if (match) {
-      chars = match[0];
+      pivotPoint = match[0];
     }
-  } else {
-    chars = axis
   }
   const parts = source.split(axis);
-  return parts.reverse().join(chars)
+  return parts.reverse().join(pivotPoint);
 };
 // Test
-let source = "abc12defghi"
-console.log(`${source} -->  ${rotate(source, /\d{2}/)}` );
-source = "doconnor@setu.ie"
-console.log(`${source} -->  ${rotate(source, '@')}` );
+let source = "abc12defghi";
+console.log(`${source} -->  ${rotate(source, /\d{2}/)}`);
+source = "doconnor@setu.ie";
+console.log(`${source} -->  ${rotate(source, "@")}`);
 
 // void is the return type when nothing is returned
-export const addAndShow = ( num1: number, num2: number): void => {
+export const addAndShow = (num1: number, num2: number): void => {
   console.log(addNumbers(num1, num2));
 };
 
@@ -47,7 +47,7 @@ export const addAndShow = ( num1: number, num2: number): void => {
 
 export function printToConsole(
   text: string,
-  callback: (s: string) => string  // Declaring the callback's type.
+  callback: (s: string) => string // Declaring the callback's type.
 ): void {
   const response = callback(text);
   console.log(response);
@@ -61,13 +61,13 @@ printToConsole("hello world", (s: string) => {
 //     (n: number) => {
 //        return n < 5
 //     }   // ERROR
-// ) 
+// )
 
 export function arrayMutate(
-  numbers: number[],
+  originals: number[],
   mutate: (num: number) => number
 ): number[] {
-  return numbers.map(mutate);
+  return originals.map(mutate);
 }
 
 console.log(arrayMutate([1, 2, 3], (num) => num * 10));
@@ -83,10 +83,10 @@ type MutationFunction = (v: number) => number;
 
 // Type aliases allow cleaner syntax for declaring callback.
 export function arrayMutate2(
-  numbers: number[],
+  originals: number[],
   mutate: MutationFunction
 ): number[] {
-  return numbers.map(mutate);
+  return originals.map(mutate);
 }
 console.log(arrayMutate2([1, 2, 3], (num) => num * 100));
 
@@ -99,8 +99,9 @@ export const fetchData = (url: string) => {
 
 export const fetchPerson = (url: string): Promise<Person> => {
   const result: Person = {
-    first: "diarmuid",
-    last: "o connor",
+    first: "john",
+    last: "o meara",
+    age: 36,
   };
   return Promise.resolve(result);
 };

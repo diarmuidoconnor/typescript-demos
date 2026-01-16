@@ -55,16 +55,16 @@ const me: Person = {
 // ERROR - Dynamic object expansion is not supported. See later for alternative.
 // me.address = '1 Main street'
 
-interface CAOStudent {
+interface Student {
   name: Person;
   id: number;
   subjects: string[];
 }
 
-const studentX: CAOStudent = {
+const studentX: Student = {
   name: { first: "Joe", last: "Bloggs"},
   id: 123456,
-  subjects: ["Maths (H)", "Accountancy (O)", "English (H)"],
+  subjects: ["Cloud Computing", "AI", "Web Development"],
 };
 
 interface SemesterResult {
@@ -78,7 +78,7 @@ interface StudentExamProfile {
   resultss: SemesterResult[];
 }
 
-const studentYResults: StudentExamProfile = {
+const semesterResults: StudentExamProfile = {
   name: { first: 'Jane', last: 'Bloggs' },
   id: 123456,
   resultss: [
@@ -97,19 +97,19 @@ type Course = {
   qualification: string;
 };
 
-type AcademicEntity = CAOStudent | Course;  // Union type
+type AcademicEntity = Student | Course;  // Union type
 
 let entity : AcademicEntity = studentX // No compiler error
 
-function processEntity(entity: AcademicEntity) {
+function processAE(entity: AcademicEntity) {
   if ( 'code' in entity) {
     // process Course
   } else {
     // process CAOStudent
   }
 }
-processEntity(studentX);
-processEntity({
+processAE(studentX);
+processAE({
   title: "Computer Science",
   code: "AD1234",
   qualification: "BSc",
