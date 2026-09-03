@@ -42,26 +42,13 @@ export const addAndShow = (num1: number, num2: number): void => {
   console.log(addNumbers(num1, num2));
 };
 
+// A use case for the never type
+export const edgeFunct = (num1: number, num2: number): never => {
+  throw Error("Something went wrong")
+};
+
 // -------------------------------------------------------------------
 // ----------------- Higher Order Functions ---------------------
-
-export function printToConsole(
-  text: string,
-  callback: (s: string) => string // Declaring the callback's type.
-): void {
-  const response = callback(text);
-  console.log(response);
-}
-
-printToConsole("hello world", (s: string) => {
-  return s.toUpperCase();
-});
-
-//  printToConsole('hello world',
-//     (n: number) => {
-//        return n < 5
-//     }   // ERROR
-// )
 
 export function arrayMutate(
   originals: number[],
@@ -78,10 +65,10 @@ const selectiveDecrement = (n: number) => {
 
 console.log(arrayMutate([110, 20, 300], selectiveDecrement));
 
-// Declaring a custom type for a function signature.
+//===================================================
+// Type aliases allow cleaner syntax for declaring callback.
 type MutationFunction = (v: number) => number;
 
-// Type aliases allow cleaner syntax for declaring callback.
 export function arrayMutate2(
   originals: number[],
   mutate: MutationFunction
@@ -90,8 +77,8 @@ export function arrayMutate2(
 }
 console.log(arrayMutate2([1, 2, 3], (num) => num * 100));
 
-// -----------------------------------------------------------------------
-// Use cmd-k,cmd-i to suggest return type.
+// =================================================
+// Type inferencing
 // May need to set target in tsconfig for Promise to be recognised
 export const fetchData = (url: string) => {
   return Promise.resolve(`Data from ${url}`);

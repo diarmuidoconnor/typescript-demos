@@ -11,13 +11,12 @@ console.log(myNumber);
 
 console.log(myString.toUpperCase());
 
-// Excellent Intellisense support.
+// Excellent code completion support.
 // let result = myNumber.toUpperCase()   // ERROR
 
+// Live Compiler error reporting 
 let myBoolean: boolean = true;
 // myBoolean += 1      // ERROR
-
-// Intellisense also works at the object properties level (see later)
 
 //------------------------------
 // Some useful built-in types
@@ -38,25 +37,25 @@ let myStrings: Array<string> = ["hello", "world"];
 // myNums.push("three")   // ERROR
 
 // -------------------------------------------------------         /
-// ----------------- (Data) Interfaces ------------------------
-interface Person {
+// ----------------- Interface Data Types ------------------------
+interface Name {
   first: string;
   last: string;
 }
 
-const me: Person = {
+const me: Name = {
   first: "diarmuid",
   last: "o connor",
 };
 
-// Hinting support avoids runtime undefined errors
+// Code completion avoids runtime undefined errors
 // const firstName = me.
 
 // ERROR - Dynamic object expansion is not supported. See later for alternative.
 // me.address = '1 Main street'
 
 interface Student {
-  name: Person;
+  name: Name;
   id: number;
   subjects: string[];
 }
@@ -67,15 +66,15 @@ const studentX: Student = {
   subjects: ["Cloud Computing", "AI", "Web Development"],
 };
 
-interface SemesterResult {
+interface Grade {
   moduleName: string;
   grade: number;
 }
 
 interface StudentExamProfile {
-  name: Person;
+  name: Name;
   id: number;
-  resultss: SemesterResult[];
+  resultss: Grade[];
 }
 
 const semesterResults: StudentExamProfile = {
@@ -84,7 +83,7 @@ const semesterResults: StudentExamProfile = {
   resultss: [
     { moduleName: "Programming", grade: 65 },
     { moduleName: "Databases", grade: 70 },
-    // { name: "Operating Systems", grade: 58 },
+    // { name: "Operating Systems", grade: 58 },  //ERROR
   ],
 };
 
@@ -133,7 +132,7 @@ let len = aString.length;
 // determine types for the return values.
 const doubled = myNums.map((num) => num * 2);
 
-export const friends: Person[] = [
+export const friends: Name[] = [
   { first: "bob", last: "sullivan" },
   { first: "kyle", last: "dwyer" },
   { first: "jane", last: "smith" },

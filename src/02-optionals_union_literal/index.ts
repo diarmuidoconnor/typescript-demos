@@ -62,9 +62,9 @@ printIngredient("Granular Sugar", "2TS", "Can substitute with Castar Sugar");
 //   callback?.();
 // }
 
-//  --------------------------------------------------
+// =========================================
 //  -------------- More on Type Aliases --------------------
-// It allows more readable code with clearer intent.
+// It enables more readable code with clearer intent.
 // Improves DRY principle.
 
 // Union Types
@@ -119,7 +119,7 @@ const getContact = (user: UserV2): string => {
 
 console.log(getContact(kyle));
 
-// ------------------------------------------
+// ===============================================
 // Literal type
 type Department = "Engineering" | "Sales" | "Accounts";
 
@@ -129,7 +129,10 @@ const theCompany: StaffMember[] = [
   { ...jenny, department: "Engineering" },
   { ...kyle, department: "Sales" },
 ];
-const getStaffNames = (company : StaffMember[] , department: Department): string[] => {
+const getStaffNames = (
+  company: StaffMember[],
+  department: Department
+): string[] => {
   return company
     .filter((staff) => staff.department === department)
     .map((staff) => staff.name);
