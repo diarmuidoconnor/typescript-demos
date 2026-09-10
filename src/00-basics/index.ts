@@ -74,13 +74,13 @@ interface Grade {
 interface StudentExamProfile {
   name: Name;
   id: number;
-  resultss: Grade[];
+  results: Grade[];
 }
 
 const semesterResults: StudentExamProfile = {
   name: { first: 'Jane', last: 'Bloggs' },
   id: 123456,
-  resultss: [
+  results: [
     { moduleName: "Programming", grade: 65 },
     { moduleName: "Databases", grade: 70 },
     // { name: "Operating Systems", grade: 58 },  //ERROR

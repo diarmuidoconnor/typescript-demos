@@ -109,8 +109,8 @@ const jenny: UserV2 = {
 };
 
 const getContact = (user: UserV2): string => {
-  if ("street" in user.contact) {
-    const contact = user.contact;
+  if ("street" in user.contact) {   // Type narrowing
+    const contact = user.contact;  
     return `The address is: ${JSON.stringify(contact)}`;
   }
   const contact = user.contact;
