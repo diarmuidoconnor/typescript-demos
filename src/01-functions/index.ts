@@ -78,7 +78,7 @@ export function arrayMutate2(
 console.log(arrayMutate2([1, 2, 3], (num) => num * 100));
 
 // =================================================
-// Type inferencing
+// Type inference with promises
 // May need to set target in tsconfig for Promise to be recognised
 export const fetchData = (url: string) => {
   return Promise.resolve(`Data from ${url}`);

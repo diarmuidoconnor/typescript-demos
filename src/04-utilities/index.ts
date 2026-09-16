@@ -53,13 +53,13 @@ console.log(
 );
 
 // All properties except .....
-type TechUserProgramming = Omit<TechUser, "id" | "email">;
+type TechUserLanguages = Omit<TechUser, "id" | "email">;
 
 // Record<KeyType, ValueType> - Construct an object type whose keys
 // are of type KeyType and the values are of type ValueType.
-type TechUserMapById = Record<TechUser["id"], TechUserProgramming>;
+type TechUserMapById = Record<TechUser["id"], TechUserLanguages>;
 
-const makeMapById = (users: TechUser[]): TechUserMapById => {
+const buildLookupMap = (users: TechUser[]): TechUserMapById => {
   return users.reduce((acc, user) => {
     const { id, email, ...rest } = user;
     return {
@@ -70,7 +70,7 @@ const makeMapById = (users: TechUser[]): TechUserMapById => {
 };
 
 console.log(
-  makeMapById([
+  buildLookupMap([
     {
       id: 1,
       name: "Mr. Foo",
