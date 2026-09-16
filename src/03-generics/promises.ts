@@ -38,12 +38,6 @@ async function fetchRandomUsers(request: string): Promise<RandomUserResponse> {
   return body;
 }
 
-const users = await fetchRandomUsers("https://randomuser.me/api/?results=6");
-const usersName_And_Location = users.results.map((user) => {
-  return ` ${user.name.first} ${user.name.last} from ${user.location.country} `;
-});
-console.log("Random users ", usersName_And_Location);
-
 //-----------------------------------------------
 // JSON Placeholder API - https://jsonplaceholder.typicode.com/
 
@@ -60,11 +54,21 @@ async function fetchToDos(request: string) {
   return body;
 }
 
-const todos = await fetchToDos("https://jsonplaceholder.typicode.com/todos");
+async function main() {
+  const users = await fetchRandomUsers("https://randomuser.me/api/?results=6");
+  const usersName_And_Location = users.results.map((user) => {
+    return ` ${user.name.first} ${user.name.last} from ${user.location.country} `;
+  });
+  console.log("Random users ", usersName_And_Location);
 
-const completedTodos = todos
-  .filter((todo) => todo.completed)
-  .map((todo) => todo.title)
-  .slice(0, 5);
+  const todos = await fetchToDos("https://jsonplaceholder.typicode.com/todos");
 
-console.log("Completed todos titles ", JSON.stringify(completedTodos));
+  const completedTodos = todos
+    .filter((todo) => todo.completed)
+    .map((todo) => todo.title)
+    .slice(0, 5);
+
+  console.log("Completed todos titles ", JSON.stringify(completedTodos));
+}
+
+main();
