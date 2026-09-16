@@ -2,41 +2,6 @@ import fetch from "node-fetch";
 
 // ------------- Generics with Promises --------------------------
 
-// Random User API - https://randomuser.me/
-
-type RandomUser = {
-  gender: "male" | "female";
-  name: {
-    title: string;
-    first: string;
-    last: string;
-  };
-  location: {
-    street: string;
-    city: string;
-    country: string;
-  };
-  email: string;
-  login: Object;
-  dob: Object;
-  registered: [Object];
-  phone: string;
-  cell: string;
-  id: Object;
-  picture: string;
-  nat: string;
-};
-
-interface RandomUserResponse {
-  results: RandomUser[];
-}
-
-async function fetchRandomUsers(request: string): Promise<RandomUserResponse> {
-  const response = await fetch(request);
-  // The as operator casts external values to an internal type.
-  const body = (await response.json()) as RandomUserResponse;
-  return body;
-}
 
 //-----------------------------------------------
 // JSON Placeholder API - https://jsonplaceholder.typicode.com/
@@ -48,18 +13,21 @@ interface ToDo {
   completed: boolean;
 }
 
-async function fetchToDos(request: string) {
+// Manual check on the first item, just enough to catch an unexpected shape.
+function isToDoArray(value: unknown): value is ToDo[] {
+  return Array.isArray(value) && value.length > 0 && "id" in value[0] && "completed" in value[0];
+}
+
+async function fetchToDos(request: string): Promise<ToDo[]> {
   const response = await fetch(request);
-  const body = (await response.json()) as ToDo[];
+  const body: unknown = await response.json();
+  if (!isToDoArray(body)) {
+    throw new Error("Unexpected response shape from ToDo API");
+  }
   return body;
 }
 
 async function main() {
-  const users = await fetchRandomUsers("https://randomuser.me/api/?results=6");
-  const usersName_And_Location = users.results.map((user) => {
-    return ` ${user.name.first} ${user.name.last} from ${user.location.country} `;
-  });
-  console.log("Random users ", usersName_And_Location);
 
   const todos = await fetchToDos("https://jsonplaceholder.typicode.com/todos");
 
